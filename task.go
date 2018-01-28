@@ -9,14 +9,14 @@ import (
 
 // T is the data structure for a single task
 type T struct {
-	minutes     int
+	timestamp   int
 	description string
 }
 
 // Task creates a new task consisting of a description and a number of minutes
 func Task(raw string) (t T) {
 	t.description = raw
-	t.minutes = 0
+	t.timestamp = 0
 
 	t.description = strings.TrimPrefix(t.description, "- [ ] ")
 	t.description = strings.TrimPrefix(t.description, "- [x] ")
@@ -29,7 +29,7 @@ func Task(raw string) (t T) {
 		if err != nil {
 			fmt.Println(err)
 		}
-		t.minutes = hour*60 + minute
+		t.timestamp = hour*60 + minute
 		t.description = t.description[:len(t.description)-6]
 	}
 	return
