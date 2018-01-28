@@ -90,14 +90,15 @@ func Task(raw string) (t T) {
 }
 
 func main() {
-	doProgress()
+	doProgress((45*60)/15, 15)
 	// doSpinner()
 }
 
-func doProgress() {
-	duration := (45 * 60) / 15
-	uiprogress.Start()                 // start rendering
-	bar := uiprogress.AddBar(duration) // Add a new bar
+func doProgress(cycles int, secondsPerCycle time.Duration) {
+	uiprogress.Start()               // start rendering
+	bar := uiprogress.AddBar(cycles) // Add a new bar
+
+	bar.Fill = '+'
 
 	// optionally, append and prepend completion and elapsed time
 	bar.AppendElapsed()
@@ -107,6 +108,6 @@ func doProgress() {
 	})
 
 	for bar.Incr() {
-		time.Sleep(time.Second * 15)
+		time.Sleep(time.Second * secondsPerCycle)
 	}
 }
