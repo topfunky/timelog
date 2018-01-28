@@ -12,8 +12,12 @@ import (
 	"github.com/gosuri/uiprogress"
 )
 
-type TL []T
+// TL stores a list of task structs.
+type TL struct {
+	tasks []T
+}
 
+// TaskList manages a file of task items and times.
 func TaskList(filename string) (tl TL) {
 	bytes, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -21,7 +25,7 @@ func TaskList(filename string) (tl TL) {
 	}
 	lines := strings.Split(string(bytes), "\n")
 	for _, line := range lines {
-		tl = append(tl, Task(line))
+		tl.tasks = append(tl.tasks, Task(line))
 	}
 	return
 }
