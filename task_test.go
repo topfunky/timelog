@@ -30,10 +30,3 @@ func TestTaskCompletedWithTimeError(t *testing.T) {
 		t.Error("Expected: 0, Got:", task.minutes)
 	}
 }
-
-func TestTaskListFromFilename(t *testing.T) {
-	taskList := TaskList("test/fixtures/todo.md")
-	if len(taskList.tasks) != 11 {
-		t.Error("Expected: 11, Got:", len(taskList.tasks))
-	}
-}
