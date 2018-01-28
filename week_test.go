@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -14,5 +13,4 @@ func TestWeek(t *testing.T) {
 	if monday.title != "Monday" {
 		t.Error("Expected: 'Monday', Got:", monday.title)
 	}
-	fmt.Println(monday)
 }
