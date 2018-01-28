@@ -12,8 +12,13 @@ type TL struct {
 func TaskList(rawTitle string, lines []string) (tl TL) {
 	// Parse title from raw title "# Monday"
 	tl.title = strings.Join(strings.Split(rawTitle, " ")[1:], " ")
-	for _, line := range lines {
+	// Append raw text line to tasks and calculate duration
+	// based on timestamp of previous task
+	for index, line := range lines {
 		tl.tasks = append(tl.tasks, Task(line))
+		if index > 0 {
+			tl.tasks[index].duration = tl.tasks[index].timestamp - tl.tasks[index-1].timestamp
+		}
 	}
 	return
 }

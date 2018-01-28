@@ -10,6 +10,7 @@ import (
 // T is the data structure for a single task
 type T struct {
 	timestamp   int
+	duration    int
 	description string
 }
 
