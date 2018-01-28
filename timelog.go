@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"regexp"
 	"strconv"
 	"strings"
@@ -9,6 +11,20 @@ import (
 
 	"github.com/gosuri/uiprogress"
 )
+
+type TL []T
+
+func TaskList(filename string) (tl TL) {
+	bytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(bytes), "\n")
+	for _, line := range lines {
+		tl = append(tl, Task(line))
+	}
+	return
+}
 
 // T is the data structure for a single task
 type T struct {
