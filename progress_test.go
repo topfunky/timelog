@@ -5,5 +5,5 @@ import (
 )
 
 func TestProgress(t *testing.T) {
-	doProgress(1, 1)
+	//	doProgress(1, 1)
 }
