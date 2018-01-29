@@ -40,7 +40,8 @@ func RenderReportForTaskList(taskList TL) string {
 			formatMinutes(taskList.tagStats[tag])}, "\t")+"\t")
 	}
 	w.Flush()
-	return strings.Join([]string{taskList.title, b.String()}, "\n")
+	totalDurationFormatted := formatMinutes(taskList.duration)
+	return strings.Join([]string{taskList.title + " " + totalDurationFormatted, b.String()}, "\n")
 }
 
 func formatMinutes(minutes int) string {
