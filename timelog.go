@@ -1,16 +1,19 @@
 package main
 
 import (
+	"os"
 	"time"
 
 	"github.com/gosuri/uiprogress"
 )
 
 func main() {
-	doProgress((45*60)/15, 15)
+	argsWithoutProg := os.Args[1:]
+	filename := argsWithoutProg[0]
+	doProgress(filename, (45*60)/15, 15)
 }
 
-func doProgress(cycles int, secondsPerCycle time.Duration) {
+func doProgress(filename string, cycles int, secondsPerCycle time.Duration) {
 	uiprogress.Start()               // start rendering
 	bar := uiprogress.AddBar(cycles) // Add a new bar
 
@@ -24,7 +27,8 @@ func doProgress(cycles int, secondsPerCycle time.Duration) {
 	})
 
 	bar.AppendFunc(func(b *uiprogress.Bar) string {
-		return "\n\nREPORT GOES HERE " + time.Now().String()
+		week := Week(filename)
+		return "\n" + RenderReportForWeek(week)
 	})
 
 	for bar.Incr() {

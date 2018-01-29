@@ -24,7 +24,10 @@ func TaskList(rawTitle string, lines []string) (tl TL) {
 			tl.duration += tl.tasks[index].duration
 			// TODO: Calculate stats for all tags
 			if len(tl.tasks[index].tags) > 0 {
+				// Explicit tag
 				tl.tagStats[tl.tasks[index].tags[0]] += tl.tasks[index].duration
+			} else if tl.tasks[index].duration > 0 {
+				tl.tagStats["#other"] += tl.tasks[index].duration
 			}
 		}
 	}

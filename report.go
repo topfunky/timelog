@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"sort"
 	"strings"
 	"text/tabwriter"
 )
@@ -26,10 +27,17 @@ func RenderReportForTaskList(taskList TL) string {
 	b := new(bytes.Buffer)
 	w := tabwriter.NewWriter(b, 16, 0, 2, ' ', tabwriter.FilterHTML)
 
-	for tag, duration := range taskList.tagStats {
+	// TODO: Sort by value
+	keys := make([]string, 0, len(taskList.tagStats))
+	for k := range taskList.tagStats {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	for _, tag := range keys {
 		fmt.Fprintln(w, strings.Join([]string{
 			"  " + tag,
-			formatMinutes(duration)}, "\t")+"\t")
+			formatMinutes(taskList.tagStats[tag])}, "\t")+"\t")
 	}
 	w.Flush()
 	return strings.Join([]string{taskList.title, b.String()}, "\n")

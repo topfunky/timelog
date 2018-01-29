@@ -17,6 +17,8 @@ type T struct {
 
 // Task creates a new task consisting of a description and a number of minutes
 func Task(raw string) (t T) {
+	raw = strings.TrimSpace(raw)
+
 	t.description = raw
 	t.timestamp = 0
 
