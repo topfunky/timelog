@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -9,8 +8,8 @@ func makeTaskList() TL {
 	lines := []string{
 		"- [x] BOD 08:00",
 		"- [ ] Make bacon #cooking 09:00",
-		"- [ ] Reply to emails #email 09:30",
-		"- [ ] Call Krusty the Clown #phone 12:00",
+		"- [ ] Reply to emails #communication 09:30",
+		"- [ ] Call Krusty the Clown #communication 12:00",
 	}
 	return TaskList("# Monday", lines)
 }
@@ -38,8 +37,14 @@ func TestTaskListCalculatesDurationOfOtherTask(t *testing.T) {
 
 func TestTaskListCalculatesTotalDuration(t *testing.T) {
 	taskList := makeTaskList()
-	fmt.Println(taskList)
 	if taskList.duration != 240 {
 		t.Error("Expected duration to be 240 but it was", taskList.duration)
+	}
+}
+
+func TestTaskListCalculatesTaskDuration(t *testing.T) {
+	taskList := makeTaskList()
+	if taskList.tagStats["#communication"] != 180 {
+		t.Error("Expected tag duration to be 180 but it was", taskList.tagStats["#communication"])
 	}
 }
