@@ -13,12 +13,9 @@
 # Tuesday
 
 - [x] BOD 09:00
-- [x] Meet with Krusty about clown training 09:45
-- [x] Demo with Homer 10:00
-- [x] Engineering standup
-- [x] Share slide decks with Lisa 12:08
+- [x] Meet with Bart #lunch 09:45
+- [x] Plumbo Jumbo interview #interview 10:00
+- [x] Watch Itchy & Scratchy #tv 12:08
 - [x] Update document for Marge 12:13
-- [ ] Write notes from call
-- [ ] Eat lunch 12:32
 
 # Wednesday

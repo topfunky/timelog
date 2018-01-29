@@ -26,12 +26,9 @@ func Week(filename string) (week W) {
 		if strings.HasPrefix(line, "#") {
 			if len(rawLines) > 0 {
 				week.tasklists = append(week.tasklists, TaskList(rawTitle, rawLines))
+				rawLines = make([]string, 0)
 			}
 			rawTitle = line
-			// TODO: Use existing section or reset
-			// week.tasklists = append(week.tasklists, TaskList(rawTitle, lines))
-			// week.tasklists[0].tasks = append(week.tasklists[0].tasks, Task(line))
-
 		} else if strings.HasPrefix(line, "- [") {
 			rawLines = append(rawLines, line)
 		}
