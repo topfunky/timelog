@@ -23,6 +23,10 @@ func doProgress(cycles int, secondsPerCycle time.Duration) {
 		return "Task"
 	})
 
+	bar.AppendFunc(func(b *uiprogress.Bar) string {
+		return "\n\nREPORT GOES HERE " + time.Now().String()
+	})
+
 	for bar.Incr() {
 		time.Sleep(time.Second * secondsPerCycle)
 	}
