@@ -8,9 +8,9 @@ import (
 func makeTaskList() TL {
 	lines := []string{
 		"- [x] BOD 08:00",
-		"- [ ] Make bacon 09:00",
-		"- [ ] Reply to emails 09:30",
-		"- [ ] Call Krusty the Clown 12:00",
+		"- [ ] Make bacon #cooking 09:00",
+		"- [ ] Reply to emails #email 09:30",
+		"- [ ] Call Krusty the Clown #phone 12:00",
 	}
 	return TaskList("# Monday", lines)
 }

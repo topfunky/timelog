@@ -5,11 +5,11 @@ import (
 )
 
 func makeUncompletedTask() T {
-	return Task("- [ ] Make bacon 09:34")
+	return Task("- [ ] Make bacon #eat 09:34")
 }
 
 func makeCompletedTask() T {
-	return Task("- [x] Make bacon 09:35")
+	return Task("- [x] Make bacon #cooking 09:35")
 }
 
 func TestTaskUncompleted(t *testing.T) {
@@ -22,13 +22,24 @@ func TestTaskUncompleted(t *testing.T) {
 	}
 }
 
-func TestTaskCompleted(t *testing.T) {
+func TestTaskCompletedHasTitle(t *testing.T) {
 	task := makeCompletedTask()
 	if task.description != "Make bacon" {
 		t.Error("Expected: 'Make bacon', Got:", task.description)
 	}
+}
+
+func TestTaskCompletedHasTimestamp(t *testing.T) {
+	task := makeCompletedTask()
 	if task.timestamp != 575 {
 		t.Error("Expected: 575, Got:", task.timestamp)
+	}
+}
+
+func TestTaskCompletedHasTags(t *testing.T) {
+	task := makeCompletedTask()
+	if len(task.tags) < 1 || task.tags[0] != "#cooking" {
+		t.Error("Expected tag: ['#cooking'], Got:", task.tags)
 	}
 }
 
