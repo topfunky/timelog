@@ -1,16 +1,25 @@
 package main
 
 import (
-	"os"
+	"flag"
+	"fmt"
 	"time"
 
 	"github.com/gosuri/uiprogress"
 )
 
 func main() {
-	argsWithoutProg := os.Args[1:]
-	filename := argsWithoutProg[0]
-	doProgress(filename, (45*60)/15, 15)
+	boolPtr := flag.Bool("report", false, "a bool")
+	flag.Parse()
+
+	filename := flag.Arg(0)
+
+	if *boolPtr {
+		week := Week(filename)
+		fmt.Println(RenderReportForWeek(week))
+	} else {
+		doProgress(filename, (45*60)/15, 15)
+	}
 }
 
 func doProgress(filename string, cycles int, secondsPerCycle time.Duration) {
