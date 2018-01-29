@@ -27,7 +27,7 @@ func RenderReportForTaskList(taskList TL) string {
 	b := new(bytes.Buffer)
 	w := tabwriter.NewWriter(b, 16, 0, 2, ' ', tabwriter.FilterHTML)
 
-	// TODO: Sort by value
+	// TODO: Sort by value (duration) with longest at top
 	keys := make([]string, 0, len(taskList.tagStats))
 	for k := range taskList.tagStats {
 		keys = append(keys, k)
