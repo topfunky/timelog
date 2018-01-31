@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-git log -n 1 | cut -d " " -f 2 | head -n 1 > VERSION 
-
