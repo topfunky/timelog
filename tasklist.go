@@ -18,8 +18,12 @@ func TaskList(rawTitle string, lines []string) (tl TL) {
 	// Append raw text line to tasks and calculate duration
 	// based on timestamp of previous task
 	for index, line := range lines {
-		tl.tasks = append(tl.tasks, Task(line))
+		task := Task(line)
+		tl.tasks = append(tl.tasks, task)
 		if index > 0 {
+			if task.timestamp == 0 {
+				continue
+			}
 			tl.tasks[index].duration = tl.tasks[index].timestamp - tl.tasks[index-1].timestamp
 			tl.duration += tl.tasks[index].duration
 			// TODO: Calculate stats for all tags

@@ -48,3 +48,27 @@ func TestTaskListCalculatesTaskDuration(t *testing.T) {
 		t.Error("Expected tag duration to be 180 but it was", taskList.tagStats["#communication"])
 	}
 }
+
+func makePartialTaskList() TL {
+	lines := []string{
+		"- [x] Start 19:39",
+		"- [x] Answer email 19:59",
+		"- [ ] Eat lunch",
+	}
+	return TaskList("# Thursday", lines)
+}
+
+func TestTaskListCalculatesDurationOfTaskWithoutATime(t *testing.T) {
+	taskList := makePartialTaskList()
+	finalTask := taskList.tasks[len(taskList.tasks)-1]
+	if finalTask.duration != 0 {
+		t.Error("Expected last task to have duration 0 but it was", finalTask.duration)
+	}
+}
+
+func TestTaskListCalculatesTotalDurationOfTaskWithoutATime(t *testing.T) {
+	taskList := makePartialTaskList()
+	if taskList.duration != 20 {
+		t.Error("Expected duration to be 20 but it was", taskList.duration)
+	}
+}

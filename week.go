@@ -33,5 +33,9 @@ func Week(filename string) (week W) {
 			rawLines = append(rawLines, line)
 		}
 	}
+	// Save last segment
+	if len(rawLines) > 0 {
+		week.tasklists = append(week.tasklists, TaskList(rawTitle, rawLines))
+	}
 	return
 }
