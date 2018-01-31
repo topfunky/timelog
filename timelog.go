@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"time"
 
 	"github.com/gosuri/uiprogress"
@@ -10,6 +12,8 @@ import (
 
 func main() {
 	boolPtr := flag.Bool("report", false, "a bool")
+	versionPtr := flag.Bool("version", false, "Display the version number of the app")
+	version := readVersion()
 	flag.Parse()
 
 	filename := flag.Arg(0)
@@ -17,6 +21,8 @@ func main() {
 	if *boolPtr {
 		week := Week(filename)
 		fmt.Println(RenderReportForWeek(week))
+	} else if *versionPtr {
+		fmt.Println("Version: " + version)
 	} else {
 		doProgress(filename, (45*60)/15, 15)
 	}
@@ -43,4 +49,12 @@ func doProgress(filename string, cycles int, secondsPerCycle time.Duration) {
 	for bar.Incr() {
 		time.Sleep(time.Second * secondsPerCycle)
 	}
+}
+
+func readVersion() string {
+	bytes, err := ioutil.ReadFile("VERSION")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(bytes)
 }
