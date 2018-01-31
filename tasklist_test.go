@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func makeTaskList() TL {
@@ -15,10 +17,11 @@ func makeTaskList() TL {
 }
 
 func TestTaskListMakesTasks(t *testing.T) {
+	assert := assert.New(t)
+
 	taskList := makeTaskList()
-	if len(taskList.tasks) != 4 {
-		t.Error("Expected: 4, Got:", len(taskList.tasks))
-	}
+	assert.Equal(4, len(taskList.tasks))
+
 }
 
 func TestTaskListCalculatesDurationOfFirstTask(t *testing.T) {
